@@ -12,19 +12,30 @@
  * claim that doesn't overlap.
  */
 $grid = [];
-while ($line = fgets(STDIN)) {
-    preg_match('/#[0-9]* @ ([0-9]{1,4}),([0-9]{1,4}): ([0-9]{1,4})x([0-9]{1,4})/', $line, $matches);
+$disjoint_claims = [];
 
-    list(, $start_x, $start_y, $width, $height) = $matches;
+while ($line = fgets(STDIN)) {
+    preg_match('/#([0-9]*) @ ([0-9]{1,4}),([0-9]{1,4}): ([0-9]{1,4})x([0-9]{1,4})/', $line, $matches);
+
+    list(, $id, $start_x, $start_y, $width, $height) = $matches;
 
     foreach (range($start_x, $start_x + $width - 1) as $x) {
         foreach (range($start_y, $start_y + $height - 1) as $y) {
-            $grid[$x][$y] = ($grid[$x][$y] ?? 0) + 1;
+            $grid[$x][$y][] = $id;
+        }
+    }
+    $disjoint_claims[] = $id;
+}
+
+$has_overlaps_count = 0;
+foreach ($grid as $row) {
+    foreach ($row as $claims) {
+        if (count($claims) > 1) {
+            $has_overlaps_count++;
+            $disjoint_claims = array_diff($disjoint_claims, $claims);
         }
     }
 }
 
-$claim_distributions = array_count_values(array_merge(...$grid));
-// Don't care about those squares that don't have overlapping areas
-unset($claim_distributions[1]);
-print array_sum($claim_distributions) . "\n";
+print "Part1: The number of overlapping claims is $has_overlaps_count\n";
+print "Part2: The only claim that doesn't overlap any other is " . array_pop($disjoint_claims) . "\n";
