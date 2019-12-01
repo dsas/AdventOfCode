@@ -21,19 +21,21 @@ foreach (range(1, 300) as $x) {
     }
 }
 
-// Find the 3x3 grid that has the highest total
+// Find the subset of the grid that has the highest total for part 1 all
+// subsets must be 3x3, for part 2 they may be any size
 $highest_cell = [];
 $highest_square_power = 0;
-// No need to visit 2x2 border across the right and bottom edges, they
-// won't be the top left start of any 3x3 grids.
-for ($x = 1; $x < 298; $x++) {
-    for ($y = 1; $y < 298; $y++) {
-        $cells = GetCells($fuel_cells, $x, $y);
-        $square_power = array_sum($cells);
-        if ($square_power > $highest_square_power) {
-            $highest_cell['x'] = $x;
-            $highest_cell['y'] = $y;
-            $highest_square_power = $square_power;
+for ($size = 1; $size < 300; $size++) {
+    for ($x = 1; $x + $size < 300; $x++) {
+        for ($y = 1; $y + $size < 300; $y++) {
+            $cells = GetCells($fuel_cells, $x, $y, $size);
+            $square_power = array_sum($cells);
+            if ($square_power > $highest_square_power) {
+                $highest_cell['x'] = $x;
+                $highest_cell['y'] = $y;
+                $highest_cell['size'] = $size;
+                $highest_square_power = $square_power;
+            }
         }
     }
 }
@@ -41,18 +43,23 @@ for ($x = 1; $x < 298; $x++) {
 print_r($highest_cell);
 
 /**
- * Returns the values of the grid entries that are in a 3x3 grid starting from the coordinates given
+ * Returns the values of a size square subset of the grid starting from the coordinates given
  *
  * @param $grid array containing values
  * @param $x integer horizontal coordinate
  * @param $y integer vertical coordinate
+ * @param $size integer the size of the square subset
  * @return array
  */
-function GetCells($grid, $start_x, $start_y)
+function GetCells($grid, $start_x, $start_y, $size)
 {
     $cells = [];
-    for ($x = $start_x; $x <= $start_x +2; $x++) {
-        for ($y = $start_y; $y <= $start_y +2; $y++) {
+    for ($x = $start_x; $x < $start_x + $size; $x++) {
+        for ($y = $start_y; $y < $start_y + $size; $y++) {
+            // Any out of bounds result mean it's not a square and isn't eliglble.
+            if (!isset($grid[$x][$y])) {
+                return [];
+            }
             $cells[] = $grid[$x][$y];
         }
     }
