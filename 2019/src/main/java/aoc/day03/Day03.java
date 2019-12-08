@@ -31,12 +31,29 @@ public class Day03 implements Day {
 
     @Override
     public String part2(List<String> input) {
-        return null;
+        int intersectionSteps;
+        int steps = Integer.MAX_VALUE;
+
+        // plot line for each input
+        ArrayList<Coordinate> firstWire = CreateWire(input.get(0));
+        ArrayList<Coordinate> secondWire = CreateWire(input.get(1));
+
+        // For each intersection calculate how many steps it took for each wire to get there and return the smallest
+        // combination.
+        for (Coordinate firstWirePoint : firstWire) {
+            for (Coordinate secondWirePoint: secondWire) {
+                if (firstWirePoint.equals(secondWirePoint)) {
+                    steps = Math.min(firstWirePoint.getSteps() + secondWirePoint.getSteps(), steps);
+                }
+            }
+        }
+        return Integer.toString(steps);
     }
 
     private ArrayList<Coordinate> CreateWire(String rawDirections) {
         int x = 0;
         int y = 0;
+        int stepCounter = 0;
         ArrayList<Coordinate> wirePath = new ArrayList<>();
 
         String[] directions = rawDirections.split(",");
@@ -45,6 +62,7 @@ public class Day03 implements Day {
             int distance = Integer.parseInt(direction.substring(1));
 
             for (; distance >=1; distance--) {
+                stepCounter++;
                 switch (direction.charAt(0)) {
                     case 'U':
                         y += 1;
@@ -59,7 +77,7 @@ public class Day03 implements Day {
                         x -= 1;
                         break;
                 }
-                wirePath.add(new Coordinate(x, y));
+                wirePath.add(new Coordinate(x, y, stepCounter));
             }
 
         }
