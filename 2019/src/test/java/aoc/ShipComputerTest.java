@@ -4,9 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -36,7 +34,7 @@ public class ShipComputerTest {
     public void testComputer(List<Integer> program, List<Integer> expectedResult) {
         ShipComputer computer = new ShipComputer();
 
-        List<Integer> actualResult = computer.ExecuteProgram(program);
+        List<Integer> actualResult = computer.executeProgram(program);
         assertEquals(expectedResult, actualResult);
     }
 }

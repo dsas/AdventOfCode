@@ -19,7 +19,7 @@ public class Day02 implements Day {
         program.set(2,2);
 
         ShipComputer computer = new ShipComputer();
-        program = computer.ExecuteProgram(program);
+        program = computer.executeProgram(program);
 
         return program.get(0).toString();
     }
@@ -37,7 +37,7 @@ public class Day02 implements Day {
                program.set(1, i);
                program.set(2, j);
 
-               resultState = computer.ExecuteProgram(program);
+               resultState = computer.executeProgram(program);
                if (resultState.get(0) == 19690720) {
                    return Integer.toString(100 * i + j);
                }

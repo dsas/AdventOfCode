@@ -16,36 +16,52 @@ public class ShipComputer {
     private static final int MULTIPLY = 2;
     private static final int HALT = 99;
 
+    private int instructionPointer;
+
+    private List<Integer> memory;
+
     /**
      * Execute an Intcode program, returning the modified program
      * @param program Intcode program to run
      * @return Intcode program after executing the program
      */
-    public List<Integer> ExecuteProgram(List<Integer> program) {
-        int currentRegister = 0;
+    public List<Integer> executeProgram(List<Integer> program) {
+        instructionPointer = 0;
+        memory = program;
 
         while(true) {
-            int currentOpCode = program.get(currentRegister);
-
-            if (currentOpCode == HALT) {
-                return program;
-            }
-
-            int leftOperandRegister = program.get(currentRegister + 1);
-            int leftValue = program.get(leftOperandRegister);
-            int rightOperandRegister = program.get(currentRegister + 2);
-            int rightValue = program.get(rightOperandRegister);
-            int targetRegister = program.get(currentRegister + 3);
-
-            switch(currentOpCode) {
+            switch(memory.get(instructionPointer)) {
+                case HALT:
+                    return memory;
                 case ADD:
-                    program.set(targetRegister, leftValue + rightValue);
+                    add();
                     break;
                 case MULTIPLY:
-                    program.set(targetRegister, leftValue * rightValue);
+                    multiply();
                     break;
             }
-            currentRegister += 4;
         }
+    }
+
+    private void add() {
+        int leftOperandRegister = memory.get(instructionPointer + 1);
+        int leftValue = memory.get(leftOperandRegister);
+        int rightOperandRegister = memory.get(instructionPointer + 2);
+        int rightValue = memory.get(rightOperandRegister);
+        int targetRegister = memory.get(instructionPointer + 3);
+
+        memory.set(targetRegister, leftValue + rightValue);
+        instructionPointer += 4;
+    }
+
+    private void multiply() {
+        int leftOperandRegister = memory.get(instructionPointer + 1);
+        int leftValue = memory.get(leftOperandRegister);
+        int rightOperandRegister = memory.get(instructionPointer + 2);
+        int rightValue = memory.get(rightOperandRegister);
+        int targetRegister = memory.get(instructionPointer + 3);
+
+        memory.set(targetRegister, leftValue * rightValue);
+        instructionPointer += 4;
     }
 }
