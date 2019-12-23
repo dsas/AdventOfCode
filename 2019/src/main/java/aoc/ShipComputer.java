@@ -59,6 +59,9 @@ public class ShipComputer {
                 case WRITE_OUTPUT:
                     writeToOutput();
                     break;
+                default:
+                    var invalidOp = this.memory.get(this.instructionPointer);
+                    throw new InvalidOpCodeException(String.format("Instruction at %1$d is %2$d which is invalid", this.instructionPointer, invalidOp));
             }
         }
     }
