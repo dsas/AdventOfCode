@@ -1,5 +1,6 @@
 package aoc;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -14,11 +15,24 @@ import java.util.List;
 public class ShipComputer {
     private static final int ADD = 1;
     private static final int MULTIPLY = 2;
+    private static final int READ_INPUT = 3;
+    private static final int WRITE_OUTPUT = 4;
     private static final int HALT = 99;
 
-    private int instructionPointer;
+    private LinkedList<Integer> input;
+    private LinkedList<Integer> output;
 
+    private int instructionPointer;
     private List<Integer> memory;
+
+    public ShipComputer() {
+        this.output = new LinkedList<>();
+    }
+
+    public ShipComputer(LinkedList<Integer> input) {
+        this();
+        this.input = input;
+    }
 
     /**
      * Execute an Intcode program, returning the modified program
@@ -26,18 +40,24 @@ public class ShipComputer {
      * @return Intcode program after executing the program
      */
     public List<Integer> executeProgram(List<Integer> program) {
-        instructionPointer = 0;
-        memory = program;
+        this.instructionPointer = 0;
+        this.memory = program;
 
         while(true) {
-            switch(memory.get(instructionPointer)) {
+            switch(this.memory.get(this.instructionPointer)) {
                 case HALT:
-                    return memory;
+                    return this.memory;
                 case ADD:
                     add();
                     break;
                 case MULTIPLY:
                     multiply();
+                    break;
+                case READ_INPUT:
+                    readFromInput();
+                    break;
+                case WRITE_OUTPUT:
+                    writeToOutput();
                     break;
             }
         }
@@ -63,5 +83,21 @@ public class ShipComputer {
 
         memory.set(targetRegister, leftValue * rightValue);
         instructionPointer += 4;
+    }
+
+    private void readFromInput() {
+        int targetRegister = memory.get(instructionPointer + 1);
+        memory.set(targetRegister, input.remove());
+        instructionPointer += 2;
+    }
+
+    private void writeToOutput() {
+        int targetRegister = memory.get(instructionPointer + 1);
+        output.add(memory.get(targetRegister));
+        instructionPointer += 2;
+    }
+
+    public int output() {
+        return this.output.poll();
     }
 }
