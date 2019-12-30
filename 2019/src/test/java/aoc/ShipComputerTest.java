@@ -59,6 +59,18 @@ public class ShipComputerTest {
         assertEquals(5, computer.output());
     }
 
+    @Test
+    public void multiplyWithMode() {
+        // 33 * 3 = 99
+        testComputer(new ArrayList<>(Arrays.asList(1002, 4, 3, 4, 33)), new ArrayList<>(Arrays.asList(1002, 4, 3, 4, 99)));
+    }
+
+    @Test
+    public void addWithMode() {
+        // 66 + 33 = 99
+        testComputer(new ArrayList<>(Arrays.asList(1001, 4, 66, 4, 33)), new ArrayList<>(Arrays.asList(1001, 4, 66, 4, 99)));
+    }
+
     private void testComputer(List<Integer> program, List<Integer> expectedResult) {
         ShipComputer computer = new ShipComputer();
 
