@@ -148,4 +148,14 @@ public class ShipComputer {
     public int output() {
         return this.output.poll();
     }
+
+    /**
+     *
+     * @return the whole of the output buffer, emptying it afterwards
+     */
+    public LinkedList<Integer> outputBuffer() {
+        LinkedList<Integer> output = (LinkedList<Integer>) this.output.clone();
+        this.output.clear();
+        return output;
+    }
 }

@@ -90,6 +90,17 @@ public class ShipComputerTest {
         testComputer(new ArrayList<>(Arrays.asList(1001, 4, 66, 4, 33)), new ArrayList<>(Arrays.asList(1001, 4, 66, 4, 99)));
     }
 
+    @Test
+    public void outputBuffer() {
+        ShipComputer computer = new ShipComputer();
+        // Program means put the value stored in memory location indicated by 2nd memory location into the output buffer
+        // and then do it again, then stop.
+        List<Integer> actualResult = computer.executeProgram(new ArrayList<>(Arrays.asList(4, 0, 4, 0, 99)));
+        assertEquals(new LinkedList<>(List.of(4, 4)), computer.outputBuffer());
+        assertEquals("Output buffer should be drained", 0, computer.outputBuffer().size());
+        assertEquals(new ArrayList<>(Arrays.asList(4, 0, 4, 0, 99)), actualResult);
+    }
+
     private void testComputer(List<Integer> program, List<Integer> expectedResult) {
         ShipComputer computer = new ShipComputer();
 
