@@ -9,13 +9,13 @@ import static org.junit.Assert.assertEquals;
 public class ShipComputerTest {
 
     @Test
-    public void addNumbers() {
+    public void addNumbersInPositionMode() {
         // 1 + 1 = 2
         testComputer(new ArrayList<>(Arrays.asList(1, 0, 0, 0, 99)), new ArrayList<>(Arrays.asList(2, 0, 0, 0, 99)));
     }
 
     @Test
-    public void multiplyNumbers() {
+    public void multiplyNumbersInPositionMode() {
         // 3 * 2 = 6
         testComputer(new ArrayList<>(Arrays.asList(2, 3, 0, 3, 99)), new ArrayList<>(Arrays.asList(2, 3, 0, 6, 99)));
         // 99 * 99 = 9801
@@ -30,21 +30,40 @@ public class ShipComputerTest {
     }
 
     @Test
-    public void readFromInput() {
+    public void readFromInputInPositionMode() {
         LinkedList<Integer> input = new LinkedList<>(Collections.singletonList(5));
         ShipComputer computer = new ShipComputer(input);
-        // Store 5 (input) in position 0
+        // Program means put the input value into memory location indicated by 2nd memory location and stop.
         List<Integer> actualResult = computer.executeProgram(new ArrayList<>(Arrays.asList(3,0,99)));
         assertEquals(new ArrayList<>(Arrays.asList(5,0,99)), actualResult);
     }
 
     @Test
-    public void writeToOutput() {
+    public void readFromInputInImmediateMode() {
+        LinkedList<Integer> input = new LinkedList<>(Collections.singletonList(5));
+        ShipComputer computer = new ShipComputer(input);
+        // Program means put the input value into memory location and stop
+        List<Integer> actualResult = computer.executeProgram(new ArrayList<>(Arrays.asList(103,0,99)));
+        assertEquals(new ArrayList<>(Arrays.asList(103,5,99)), actualResult);
+    }
+
+    @Test
+    public void writeToOutputInPositionMode() {
         ShipComputer computer = new ShipComputer();
-        // Output 1
-        List<Integer> actualResult = computer.executeProgram(new ArrayList<>(Arrays.asList(4, 1, 99)));
-        assertEquals(1, computer.output());
-        assertEquals(new ArrayList<>(Arrays.asList(4, 1, 99)), actualResult);
+        // Program means put the value stored in memory location indicated by 2nd memory location into the output buffer
+        // and stop.
+        List<Integer> actualResult = computer.executeProgram(new ArrayList<>(Arrays.asList(4, 0, 99)));
+        assertEquals(4, computer.output());
+        assertEquals(new ArrayList<>(Arrays.asList(4, 0, 99)), actualResult);
+    }
+
+    @Test
+    public void writeToOutputInImmediateMode() {
+        ShipComputer computer = new ShipComputer();
+        // Program means put the value stored in 2nd memory location into the output buffer
+        List<Integer> actualResult = computer.executeProgram(new ArrayList<>(Arrays.asList(104, 2, 99)));
+        assertEquals(2, computer.output());
+        assertEquals(new ArrayList<>(Arrays.asList(104, 2, 99)), actualResult);
     }
 
     @Test
@@ -60,13 +79,13 @@ public class ShipComputerTest {
     }
 
     @Test
-    public void multiplyWithMode() {
+    public void multiplyInImmediate() {
         // 33 * 3 = 99
         testComputer(new ArrayList<>(Arrays.asList(1002, 4, 3, 4, 33)), new ArrayList<>(Arrays.asList(1002, 4, 3, 4, 99)));
     }
 
     @Test
-    public void addWithMode() {
+    public void addInImmediateMode() {
         // 66 + 33 = 99
         testComputer(new ArrayList<>(Arrays.asList(1001, 4, 66, 4, 33)), new ArrayList<>(Arrays.asList(1001, 4, 66, 4, 99)));
     }

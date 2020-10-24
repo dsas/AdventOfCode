@@ -62,10 +62,10 @@ public class ShipComputer {
                     multiply(mode);
                     break;
                 case READ_INPUT:
-                    readFromInput();
+                    readFromInput(mode);
                     break;
                 case WRITE_OUTPUT:
-                    writeToOutput();
+                    writeToOutput(mode);
                     break;
                 default:
                     throw new InvalidOpCodeException(String.format("Instruction at %1$d is %2$d which is invalid", this.instructionPointer, opcode));
@@ -118,18 +118,33 @@ public class ShipComputer {
         return new int[] {leftValue, rightValue};
     }
 
-    private void readFromInput() {
-        int targetRegister = memory.get(instructionPointer + 1);
+    private void readFromInput(int mode) {
+        int targetRegister;
+        if (mode / 100 % 10 == 1) {
+            targetRegister = instructionPointer + 1;
+        } else {
+            targetRegister = memory.get(instructionPointer + 1);
+        }
+
         memory.set(targetRegister, input.remove());
         instructionPointer += 2;
     }
 
-    private void writeToOutput() {
-        int targetRegister = memory.get(instructionPointer + 1);
+    private void writeToOutput(int mode) {
+        int targetRegister;
+        if (mode / 100 % 10 == 1) {
+            targetRegister = instructionPointer + 1;
+        } else {
+            targetRegister = memory.get(instructionPointer + 1);
+        }
+
         output.add(memory.get(targetRegister));
         instructionPointer += 2;
     }
 
+    /**
+     * @return oldest value in the output buffer, which is then removed
+     */
     public int output() {
         return this.output.poll();
     }
