@@ -7,10 +7,9 @@ import java.util.List;
  * Implementation of an Intcode computer
  *
  * An Intcode program is a list of integers separated by commas.
- * The first position in the list will be an opcode - 1 (add), 2 (multiply) or 99 (halt immediately).
- * The second and third positions in the list are the values to operate on.
- * The fourth position in the list is the position to store the result of the operation in.
- * Execution then moves to the next opcode (every fourth value)
+ * The first integer is an op-code, and subsequent integers are either parameters for that operation or a new op-code
+ * Op-codes have a fixed number of parameters, though this varies for each op-code.
+ * Executing an op-code will resolve any parameters, perform the operation and then go to the next op-code
  */
 public class ShipComputer {
     private static final int ADD = 1;
@@ -73,6 +72,13 @@ public class ShipComputer {
         }
     }
 
+    /**
+     * Performs an add operation
+     * Add is op-code one and takes three parameters, so it will consume four integers
+     * The second and third parameters are the values to add (either absolute values or the memory location of the
+     * absolute values)
+     * The fourth parameter is the position to store the result of the addition in.
+     */
     private void add(int mode) {
         int[] params = resolveValues(mode);
 
@@ -82,6 +88,13 @@ public class ShipComputer {
         instructionPointer += 4;
     }
 
+    /**
+     * Performs a multiply operation
+     * Multiply is op-code one and takes three parameters, so it will consume four integers
+     * The second and third parameters are the values to multiply (either absolute values or the memory location of the
+     * absolute values)
+     * The fourth parameter is the position to store the result of the addition in.
+     */
     private void multiply(int mode) {
         int[] params = resolveValues(mode);
 
@@ -118,6 +131,11 @@ public class ShipComputer {
         return new int[] {leftValue, rightValue};
     }
 
+    /**
+     * Performs a read from input operation
+     * Read is op-code three and takes one parameter, so it will consume two integers
+     * The parameter is the position to store the read value in
+     */
     private void readFromInput(int mode) {
         int targetRegister;
         if (mode / 100 % 10 == 1) {
@@ -130,6 +148,11 @@ public class ShipComputer {
         instructionPointer += 2;
     }
 
+    /**
+     * Performs a write to output operation
+     * Write is op-code four and takes one parameter, so it will consume two integers
+     * The parameter is the value to output (either absolute value or the memory location of the absolute value)
+     */
     private void writeToOutput(int mode) {
         int targetRegister;
         if (mode / 100 % 10 == 1) {
