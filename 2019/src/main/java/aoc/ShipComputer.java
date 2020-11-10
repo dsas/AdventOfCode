@@ -17,6 +17,7 @@ public class ShipComputer {
     private static final int READ_INPUT = 3;
     private static final int WRITE_OUTPUT = 4;
     private static final int JUMP_IF_TRUE = 5;
+    private static final int JUMP_IF_FALSE = 6;
     private static final int HALT = 99;
 
     private LinkedList<Integer> input;
@@ -69,6 +70,9 @@ public class ShipComputer {
                     break;
                 case JUMP_IF_TRUE:
                     jumpIfTrue(mode);
+                    break;
+                case JUMP_IF_FALSE:
+                    jumpIfFalse(mode);
                     break;
                 default:
                     throw new InvalidOpCodeException(String.format("Instruction at %1$d is %2$d which is invalid", this.instructionPointer, opcode));
@@ -199,6 +203,25 @@ public class ShipComputer {
         int[] params = resolveValues(mode);
 
         if (params[0] != 0){
+            instructionPointer = params[1];
+        } else {
+            instructionPointer += 3;
+        }
+    }
+
+    /**
+     * Performs a jump if false operation
+     * Jump if false takes two parameters
+     * The first parameter is the value to check for falsiness (either absolute values or the memory location of the
+     * absolute values)
+     * The second parameter is the position to jump to (either absolute, or the memory location of the absolute value) if
+     * the first parameter is falsey.
+     * If the first parameter is not falsey then three integers are consumed.
+     */
+    private void jumpIfFalse(int mode) {
+        int[] params = resolveValues(mode);
+
+        if (params[0] == 0){
             instructionPointer = params[1];
         } else {
             instructionPointer += 3;

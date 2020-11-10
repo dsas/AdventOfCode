@@ -141,6 +141,60 @@ public class ShipComputerTest {
         assertEquals(program, actualResult);
     }
 
+    @Test
+    public void jumpsIfFalseDoesNotJumpWhenTrueInPositionMode() {
+        ShipComputer computer = new ShipComputer();
+        // Program means if 6 is not 0 end, or in more detail:
+        // As value stored in position zero (6) is not zero
+        // continue to instruction stored in position 3
+        // end
+        ArrayList<Integer> program = new ArrayList<>(Arrays.asList(6, 0, 4, 99, 4, 0, 99));
+        List<Integer> actualResult = computer.executeProgram(program);
+        assertEquals(0, computer.outputBuffer().size());
+        assertEquals(program, actualResult);
+    }
+
+    @Test
+    public void jumpsIfFalseDoesNotJumpWhenTrueInImmediateMode() {
+        ShipComputer computer = new ShipComputer();
+        // Program means if 1 is not 0 end, or in more detail:
+        // As 1 is not 0
+        // continue to instruction stored in position 3
+        // end
+        ArrayList<Integer> program = new ArrayList<>(Arrays.asList(106, 1, 4, 99, 4, 0, 99));
+        List<Integer> actualResult = computer.executeProgram(program);
+        assertEquals(0, computer.outputBuffer().size());
+        assertEquals(program, actualResult);
+    }
+
+    @Test
+    public void jumpsIfFalseJumpsWhenFalseInPositionMode() {
+        ShipComputer computer = new ShipComputer();
+        // Program means if 0 is 0 output 5 and end, or in more detail:
+        // If value in position 4 is zero (it is) then
+        //  jump to instruction listed in position 7 (8)
+        // output value stored in position 5 (99)
+        // then end
+        ArrayList<Integer> program = new ArrayList<>(Arrays.asList(6, 4, 7, 4, 0, 99, -12, 8, 4, 5, 99));
+        List<Integer> actualResult = computer.executeProgram(program);
+        assertEquals(99, computer.output());
+        assertEquals(program, actualResult);
+    }
+
+    @Test
+    public void jumpsIfFalseJumpsWhenFalseInImmediateMode() {
+        ShipComputer computer = new ShipComputer();
+        // Program means if 0 is 0 output 1006 and end, or in more detail:
+        // If value in position 4 is zero (it is)
+        // jump to instruction 7
+        // output value stored in position 0 (1006)
+        // then end
+        ArrayList<Integer> program = new ArrayList<>(Arrays.asList(1006, 4, 7, 4, 0, 99, 99, 4, 0, 99));
+        List<Integer> actualResult = computer.executeProgram(program);
+        assertEquals(1006, computer.output());
+        assertEquals(program, actualResult);
+    }
+
     private void testComputer(List<Integer> program, List<Integer> expectedResult) {
         ShipComputer computer = new ShipComputer();
 
