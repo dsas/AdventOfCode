@@ -101,6 +101,46 @@ public class ShipComputerTest {
         assertEquals(new ArrayList<>(Arrays.asList(4, 0, 4, 0, 99)), actualResult);
     }
 
+    @Test
+    public void jumpsIfTrueJumpsWhenTrueInPositionMode() {
+        ShipComputer computer = new ShipComputer();
+        // Program means if 1 is not 0 output 5 and end.
+        ArrayList<Integer> program = new ArrayList<>(Arrays.asList(5, 1, 4, 99, 4, 0, 99));
+        List<Integer> actualResult = computer.executeProgram(program);
+        assertEquals(5, computer.output());
+        assertEquals(program, actualResult);
+    }
+
+    @Test
+    public void jumpsIfTrueJumpsWhenTrueInImmediateMode() {
+        ShipComputer computer = new ShipComputer();
+        // Program means if 1 is not 0 output 105 and end.
+        ArrayList<Integer> program = new ArrayList<>(Arrays.asList(105, 1, 4, 99, 4, 0, 99));
+        List<Integer> actualResult = computer.executeProgram(program);
+        assertEquals(105, computer.output());
+        assertEquals(program, actualResult);
+    }
+
+    @Test
+    public void jumpsIfTrueDoesNotJumpWhenFalseInPositionMode() {
+        ShipComputer computer = new ShipComputer();
+        // Program means if 0 is 0 output 5 and end.
+        ArrayList<Integer> program = new ArrayList<>(Arrays.asList(5, 4, 4, 4, 0, 99));
+        List<Integer> actualResult = computer.executeProgram(program);
+        assertEquals(5, computer.output());
+        assertEquals(program, actualResult);
+    }
+
+    @Test
+    public void jumpsIfTrueDoesNotJumpWhenFalseInImmediateMode() {
+        ShipComputer computer = new ShipComputer();
+        // Program means if 0 is 0 output 1005 and end.
+        ArrayList<Integer> program = new ArrayList<>(Arrays.asList(1005, 4, 4, 4, 0, 99));
+        List<Integer> actualResult = computer.executeProgram(program);
+        assertEquals(1005, computer.output());
+        assertEquals(program, actualResult);
+    }
+
     private void testComputer(List<Integer> program, List<Integer> expectedResult) {
         ShipComputer computer = new ShipComputer();
 
