@@ -207,6 +207,45 @@ public class ShipComputerTest {
         testComputer(new ArrayList<>(Arrays.asList(7, 0, 1, 0, 99)), new ArrayList<>(Arrays.asList(0, 0, 1, 0, 99)));
     }
 
+    @Test
+    public void outputs999ForInputsBelowEight() {
+        LinkedList<Integer> input = new LinkedList<>(Collections.singletonList(5));
+        ShipComputer computer = new ShipComputer(input);
+        ArrayList<Integer> program = new ArrayList<>(Arrays.asList(3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,
+                                                                   1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,
+                                                                   999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99));
+
+        computer.executeProgram(program);
+
+        assertEquals(999, computer.output());
+    }
+
+    @Test
+    public void outputs1000ForInputsEquallingEight() {
+        LinkedList<Integer> input = new LinkedList<>(Collections.singletonList(8));
+        ShipComputer computer = new ShipComputer(input);
+        ArrayList<Integer> program = new ArrayList<>(Arrays.asList(3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,
+                1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,
+                999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99));
+
+        computer.executeProgram(program);
+
+        assertEquals(1000, computer.output());
+    }
+
+    @Test
+    public void outputs1001ForInputsAboveEight() {
+        LinkedList<Integer> input = new LinkedList<>(Collections.singletonList(9));
+        ShipComputer computer = new ShipComputer(input);
+        ArrayList<Integer> program = new ArrayList<>(Arrays.asList(3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,
+                1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,
+                999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99));
+
+        computer.executeProgram(program);
+
+        assertEquals(1001, computer.output());
+    }
+
     private void testComputer(List<Integer> program, List<Integer> expectedResult) {
         ShipComputer computer = new ShipComputer();
 
