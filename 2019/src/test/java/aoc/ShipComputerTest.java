@@ -195,6 +195,18 @@ public class ShipComputerTest {
         assertEquals(program, actualResult);
     }
 
+    @Test
+    public void lessThanStoresOneWhenLessThan() {
+        // Program means if 1 is less than 7, store 1 at the beginning
+        testComputer(new ArrayList<>(Arrays.asList(7, 1, 0, 0, 99)), new ArrayList<>(Arrays.asList(1, 1, 0, 0, 99)));
+    }
+
+    @Test
+    public void lessThanStoresZeroWhenMoreThan() {
+        // Program means if 7 is less than 1, store 0 at the beginning
+        testComputer(new ArrayList<>(Arrays.asList(7, 0, 1, 0, 99)), new ArrayList<>(Arrays.asList(0, 0, 1, 0, 99)));
+    }
+
     private void testComputer(List<Integer> program, List<Integer> expectedResult) {
         ShipComputer computer = new ShipComputer();
 
