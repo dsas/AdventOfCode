@@ -19,6 +19,7 @@ public class ShipComputer {
     private static final int JUMP_IF_TRUE = 5;
     private static final int JUMP_IF_FALSE = 6;
     private static final int LESS_THAN = 7;
+    private static final int EQUALS = 8;
     private static final int HALT = 99;
 
     private LinkedList<Integer> input;
@@ -77,6 +78,9 @@ public class ShipComputer {
                     break;
                 case LESS_THAN:
                     lessThan(mode);
+                    break;
+                case EQUALS:
+                    equals(mode);
                     break;
                 default:
                     throw new InvalidOpCodeException(String.format("Instruction at %1$d is %2$d which is invalid", this.instructionPointer, opcode));
@@ -247,6 +251,30 @@ public class ShipComputer {
 
 
         if (params[0] < params[1]){
+            value = 1;
+        } else {
+            value = 0;
+        }
+
+        memory.set(targetRegister, value);
+        this.instructionPointer += 4;
+    }
+
+    /**
+     * Performs an equals operation
+     * Equals than takes three parameters, so consuming four integers
+     * The first parameter is compared against the second parameter (either can be absolute or relative), storing 1 in
+     * the third parameter if first parameter == 2nd parameter and storing zero in the third parameter otherwise.
+     *
+     * @param mode
+     */
+    private void equals(int mode) {
+        int[] params = resolveValues(mode);
+        int targetRegister = memory.get(instructionPointer + 3);
+        int value;
+
+
+        if (params[0] == params[1]){
             value = 1;
         } else {
             value = 0;
