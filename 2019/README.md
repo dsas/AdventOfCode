@@ -1,3 +1,5 @@
+![Java CI with Gradle](https://github.com/dsas/AdventOfCode/workflows/Java%20CI%20with%20Gradle/badge.svg?branch=master)
+
 # Advent of Code 2019 in Java
 
 Solutions for [Advent of Code 2019](https://adventofcode.com/2019) challenge in Java.
