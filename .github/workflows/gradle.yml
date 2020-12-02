@@ -1,13 +1,17 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Java CI with Gradle
+name: 2019 build and test
 
 on:
   push:
+    paths:
+      - "2019/**"
     branches: [ master ]
   pull_request:
     branches: [ master ]
+    paths:
+      - "2019/**"
 
 jobs:
   build:
