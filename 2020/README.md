@@ -1,3 +1,4 @@
+![Build status](https://github.com/dsas/AdventOfCode/workflows/2020%20build%20and%20test/badge.svg)
 # Advent of code 2020
 Solutions for [Advent of Code 2020](https://adventofcode.com/2020) challenge in javascript.
 
