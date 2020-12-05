@@ -34,9 +34,10 @@ public class Day06 implements Day {
 
     @Override
     public String part2(List<String> input) {
-
-
-        return null;
+        OrbitMap map = this.buildMap(input);
+        ArrayList<String> transferRoute = map.transferPathBetween("YOU", "SAN");
+        // The full path is returned, including YOU and SAN, adjust the orbit count to take that into account.
+        return Integer.toString(transferRoute.size() - 3);
     }
 }
 

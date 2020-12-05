@@ -20,4 +20,12 @@ public class Day06Test {
         assertEquals(Integer.toString(42), result);
     }
 
+    @Test
+    public void testPart2() {
+        List<String> input = Arrays.asList("COM)B", "B)C", "C)D", "D)E", "E)F", "B)G", "G)H", "D)I", "E)J", "J)K", "K)L", "K)YOU", "I)SAN");
+
+        String result = new Day06().part2(input);
+
+        assertEquals(Integer.toString(4), result);
+    }
 }
