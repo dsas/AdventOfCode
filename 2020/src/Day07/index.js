@@ -38,6 +38,7 @@ const getAllParents = (relations, child) => {
 
 
 const partTwo = (input) => {
+  // eslint-disable-next-line no-unused-vars
   const bagRules = parseInputString(input)
 
 }

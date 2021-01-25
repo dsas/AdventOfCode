@@ -62,6 +62,7 @@ class ManhattanCalculator {
 
 
 const partTwo = (input) => {
+  // eslint-disable-next-line no-unused-vars
   const numbers = parseInputString(input);
 
 }
