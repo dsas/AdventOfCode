@@ -17,4 +17,5 @@ yarn run lint
 
 # Run
 ```
-yarn run
+node . <Day no>
+```
