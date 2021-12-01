@@ -43,7 +43,7 @@
     "fs.realpath": "^1.0.0",
     "get-caller-file": "^2.0.5",
     "glob": "^7.1.6",
-    "glob-parent": "^5.1.1",
+    "glob-parent": "^5.1.2",
     "growl": "^1.10.5",
     "has-flag": "^4.0.0",
     "he": "^1.2.0",
