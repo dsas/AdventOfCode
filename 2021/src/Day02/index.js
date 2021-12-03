@@ -1,5 +1,8 @@
 /**
+ * Parse instructions of the form <Direction N> to calculate the product of the destination horizontal
+ * position and the depth
  * 
+ * Each instruction results in a move in a horizontal or vertical direction.
  */
 const partOne = (input) => {
     const instructions = parseInputString(input)
@@ -28,7 +31,11 @@ const partOne = (input) => {
 }
 
 /**
+ * Parse instructions of the form <Direction N> to calculate the product of the destination horizontal
+ * position and the depth
  * 
+ * The forward instruction moves in horizontal and vertical directions while the up and down instruction
+ * changes the trajectory
  */
 const partTwo = (input) => {
     const instructions = parseInputString(input)
