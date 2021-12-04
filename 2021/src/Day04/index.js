@@ -77,6 +77,9 @@ const parseInputString = (input) => {
             card.push(element.match(/\d+/g).map(n => parseInt(n)));
         }
     });
+    if (card) {
+        deck.push(card);
+    }
 
     return [calls, deck];
 }
@@ -110,4 +113,4 @@ const removeCard = (deck, card) => {
 }
 
 
-module.exports = {partOne, partTwo, hasWon, scoreCard, removeCard };
+module.exports = {partOne, partTwo, hasWon, scoreCard, removeCard, parseInputString };
