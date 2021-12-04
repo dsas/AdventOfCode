@@ -34,11 +34,10 @@ const partOne = (input) => {
 const partTwo = (input) => {
     let [calls, deck]= parseInputString(input)
     let currentCall;
-    let currentCard;
     let deckwinners = [];
     while (deck.length != deckwinners.length ) {
         currentCall = calls.shift();
-        for (currentCard = 0; currentCard < deck.length; currentCard++) {
+        for (let currentCard = 0; currentCard < deck.length; currentCard++) {
             for (let currentRow = 0; currentRow < 5; currentRow++) {
                 for (let currentCell = 0; currentCell < 5; currentCell++) {
                     if (deck[currentCard][currentRow][currentCell] == currentCall) {
