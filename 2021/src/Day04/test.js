@@ -70,7 +70,7 @@ describe('Day 04 - scoreCard', function() {
       [1, 2, 3, 4, 'X'],
       [1, 2, 3, 4, 'X'],
     ]
-    assert.strictEqual(solver.scoreCard(input, 5), 0);
+    assert.strictEqual(solver.scoreCard(input, 5), 200);
   });
 })
 
