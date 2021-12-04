@@ -55,7 +55,6 @@ const partTwo = (input) => {
             }
         }
     }
-    return scoreCard(deck[currentCard], currentCall);
 }
 
 
