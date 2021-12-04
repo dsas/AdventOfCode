@@ -153,31 +153,3 @@ describe('Day 04 part two', function() {
     assert.strictEqual(solver.partTwo(input), 1924);
   });
 });
-describe('Day 04 - removeCard', function() {
-    const deck = [
-      ['X'],
-      ['Y'],
-      ['Z'],
-    ];
-  it('Should just remove the first card', function() {
-    const expected = [
-      ['Y'],
-      ['Z'],
-    ];
-    assert.deepEqual(solver.removeCard(deck, 0), expected);
-  });
-  it('Should just remove the second card', function() {
-    const expected = [
-      ['X'],
-      ['Z'],
-    ];
-    assert.deepEqual(solver.removeCard(deck, 1), expected);
-  });
-  it('Should just remove the last card', function() {
-    const expected = [
-      ['X'],
-      ['Y'],
-    ];
-    assert.deepEqual(solver.removeCard(deck, 2), expected);
-  });
-});

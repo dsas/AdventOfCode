@@ -105,11 +105,4 @@ const scoreCard = (card, call) => {
     .reduce( (total, element) => element + total );
 }
 
-const removeCard = (deck, card) => {
-    let before = deck.slice(0, card);
-    let after = deck.slice(card + 1);
-    return before.concat(after);
-}
-
-
-module.exports = {partOne, partTwo, hasWon, scoreCard, removeCard, parseInputString };
+module.exports = {partOne, partTwo, hasWon, scoreCard, parseInputString };
