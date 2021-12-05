@@ -1,5 +1,16 @@
 /**
- * 
+ * 2021 day 4 solutions
+ * This is a bit messy, a better solution might have been to have a card class
+ * capable of checking when it's a winner and alerting the rest of the system,
+ * scoring itself and so forth.
+ */
+
+/**
+ * Find the first bingo card to win and return it's score - the sum of the uncalled numbers multiplied by the last called number
+ *
+ * Bingo cards are 5x5, winning is done by completing a row or a column.
+ *
+ * The input is the calling order as a comma separated line and further lines as bingo cards separated by two newlines
  */
 const partOne = (input) => {
     const [calls, deck]= parseInputString(input)
@@ -29,7 +40,11 @@ const partOne = (input) => {
 }
 
 /**
- * 
+ * Find the last bingo card to win
+ *
+ * Bingo cards are 5x5, winning is done by completing a row or a column.
+ *
+ * The input is the calling order as a comma separated line and further lines as bingo cards separated by two newlines
  */
 const partTwo = (input) => {
     let [calls, deck]= parseInputString(input)
@@ -59,7 +74,7 @@ const partTwo = (input) => {
 
 const parseInputString = (input) => {
     // The first line is the numbers that will be called
-    // The other lines are bingo deck - 5x5 matrices of numbers, each separated by an empty line
+    // The other lines are the bingo deck - 5x5 matrices of numbers, each separated by an empty line
     const nlSeparated = input.split("\n")
     const calls = nlSeparated.shift().split(',').map(n => parseInt(n));
     nlSeparated.shift();    // 2nd of the original lines is blank, just skip it here.
@@ -75,6 +90,7 @@ const parseInputString = (input) => {
             card.push(element.match(/\d+/g).map(n => parseInt(n)));
         }
     });
+    // Just in case the input doesn't end on a newline
     if (card) {
         deck.push(card);
     }
@@ -82,6 +98,14 @@ const parseInputString = (input) => {
     return [calls, deck];
 }
 
+/**
+ * Check to see if a card is a winning card
+ *
+ * Winning means has a full row or column of called numbers
+ *
+ * @param {array} card
+ * @returns {boolean}
+ */
 const hasWon = (card)  => {
     if (card.some( (row) => fullLine(row))) {
         return true;
@@ -96,8 +120,22 @@ const hasWon = (card)  => {
     return false;
 }
 
+/**
+ * See if every every in the line has been found - marked with an X
+ * @param {array} line
+ * @returns {boolean}
+ */
 const fullLine = (line) => line.every( (cell) => cell == 'X');
 
+/**
+ * Score a card
+ *
+ * The scoring algorithm is the sum of uncalled numbers on the card multiplied by the last called number
+ *
+ * @param {array} card
+ * @param {int} call
+ * @returns
+ */
 const scoreCard = (card, call) => {
     return call * card.flat()
     .filter( (element) => element != 'X')
