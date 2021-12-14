@@ -11,10 +11,3 @@ describe('Day 09 part one', function() {
     assert.strictEqual(solver.partOne(input), 15);
   });
 });
-
-describe('Day 09 part two', function() {
-  it('should return ? with input', function() {
-    let input = `16,1,2,0,4,2,7,1,2,14`;
-    assert.strictEqual(solver.partTwo(input), undefined);
-  });
-});

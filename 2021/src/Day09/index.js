@@ -40,8 +40,7 @@ let adjacentCoords = (x, y) => {
 /**
  *
  */
-const partTwo = (input) => {
-    const initialPositions = parseInputString(input)
+const partTwo = (input) => { // eslint-disable-line no-unused-vars
     return undefined;
 }
 
