@@ -20,10 +20,7 @@ const partOne = ( input ) => {
 		const movingCells = stacks[ from ].slice( -1 * count );
 		stacks[ to ] = stacks[ to ].concat( movingCells.reverse() );
 
-		const newFromStack = stacks[ from ].slice(
-			0,
-			stacks[ from ].length - count
-		);
+		const newFromStack = stacks[ from ].slice( 0, -1 * count );
 		stacks[ from ] = newFromStack;
 	} );
 
@@ -51,10 +48,7 @@ const partTwo = ( input ) => {
 		const movingCells = stacks[ from ].slice( -1 * count );
 		stacks[ to ] = stacks[ to ].concat( movingCells );
 
-		const newFromStack = stacks[ from ].slice(
-			0,
-			stacks[ from ].length - count
-		);
+		const newFromStack = stacks[ from ].slice( 0, -1 * count );
 		stacks[ from ] = newFromStack;
 	} );
 
