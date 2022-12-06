@@ -20,7 +20,7 @@ const partTwo = ( input ) => {
 
 const findDistinctSet = ( input, length ) => {
 	for (
-		let currentChar = length - 1;
+		let currentChar = length;
 		currentChar < input.length;
 		currentChar++
 	) {
