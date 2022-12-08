@@ -11,9 +11,9 @@
  */
 const partOne = ( input ) => {
 	const grid = parseInput( input );
-	let visibleCount = ( rowIndex = colIndex = 0 );
+	let visibleCount = 0;
 	for ( const [ rowIndex, row ] of grid.entries() ) {
-		for ( const [ colIndex ] of row.entries() ) {
+		for ( const colIndex of row.keys() ) {
 			if ( checkVisible( grid, rowIndex, colIndex ) ) {
 				visibleCount++;
 			}
@@ -63,9 +63,9 @@ const checkVisible = ( grid, rowIndex, colIndex ) => {
  */
 const partTwo = ( input ) => {
 	const grid = parseInput( input );
-	let maxScore = ( rowIndex = colIndex = 0 );
+	let maxScore = 0;
 	for ( const [ rowIndex, row ] of grid.entries() ) {
-		for ( const [ colIndex ] of row.entries() ) {
+		for ( const colIndex of row.keys() ) {
 			maxScore = Math.max(
 				maxScore,
 				calculateScore( grid, rowIndex, colIndex )
