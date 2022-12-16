@@ -29,32 +29,35 @@ const partOne = ( input ) => {
  * @returns {Number} between -1 and 1
  */
 const sort = ( left, right ) => {
-  // If both are numbers, compare them.
-	if ( ! Number.isNaN( left ) && ! Number.isNaN( right ) ) {
-    if (left === right) {
-      return 0;
-    }
-    return left < right ? -1 : 1;
+	// If both are numbers, compare them.
+	const leftIsNumber = typeof left === 'number';
+	const rightIsNumber = typeof right === 'number';
+
+	if ( leftIsNumber && rightIsNumber ) {
+		if ( left === right ) {
+			return 0;
+		}
+		return left < right ? -1 : 1;
 	}
 
-  // If one is an array and the other is a number then make both of them arrays
-	if ( Number.isNaN( left ) && ! Number.isNaN( right ) ) {
+	// If one is an array and the other is a number then make both of them arrays
+	if ( leftIsNumber && ! rightIsNumber ) {
 		left = [ left ];
-	} else if ( Number.isNaN( right ) && ! Number.isNaN( left ) ) {
+	} else if ( ! leftIsNumber && rightIsNumber ) {
 		right = [ right ];
 	}
 
   // If both are arrays, compare the elements of each array, one by one.
   for ( let i = 0; i < left.length; i++ ) {
-    if (i >= right.length) {
-      return -1;
+    if ( i >= right.length ) {
+      return 1;
     }
     let result = sort( left[ i ], right[ i ] );
     if ( result !== 0 ) {
       return result;
     }
   }
-  return left.length < right.length ? 1 : 0; // Left being longer is dealt with in the loop
+  return left.length < right.length ? -1 : 0; // Left being longer is dealt with in the loop
 };
 
 /**
