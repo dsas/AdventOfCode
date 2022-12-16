@@ -5,7 +5,15 @@
  * @returns {number}
  */
 const partOne = ( input ) => {
-	const packetPairs = parseInput( input );
+	const packetPairs = input
+		.trim()
+		.split( '\n\n' )
+		.map( ( pair ) => {
+			return pair.split( '\n' ).map( ( line ) => {
+				return JSON.parse( line );
+			} );
+		} );
+
 	return packetPairs.reduce( ( indicesSum, pair, index ) => {
 		let [ left, right ] = pair;
 		if ( sort( left, right ) === -1 ) {
@@ -47,36 +55,49 @@ const sort = ( left, right ) => {
 		right = [ right ];
 	}
 
-  // If both are arrays, compare the elements of each array, one by one.
-  for ( let i = 0; i < left.length; i++ ) {
-    if ( i >= right.length ) {
-      return 1;
-    }
-    let result = sort( left[ i ], right[ i ] );
-    if ( result !== 0 ) {
-      return result;
-    }
-  }
-  return left.length < right.length ? -1 : 0; // Left being longer is dealt with in the loop
+	// If both are arrays, compare the elements of each array, one by one.
+	for ( let i = 0; i < left.length; i++ ) {
+		if ( i >= right.length ) {
+			return 1;
+		}
+		let result = sort( left[ i ], right[ i ] );
+		if ( result !== 0 ) {
+			return result;
+		}
+	}
+	return left.length < right.length ? -1 : 0; // Left being longer is dealt with in the loop
 };
 
 /**
+ * Find the product of the 1-based indices of the packets that are [[2]] or [[6]].
  *
+ * Insert divider packetes into the packet list, sort the list using the special algorithm
+ * and return the product of the 1-based indices of the divider packets.
  *
  * @param {string} input
  * @returns {number}
  */
-const partTwo = ( input ) => {};
-
-const parseInput = ( input ) => {
-	return input
+const partTwo = ( input ) => {
+	let packets = [ [ [ 2 ] ], [ [ 6 ] ] ];
+	input
 		.trim()
-		.split( '\n\n' )
-		.map( ( pair ) => {
-			return pair.split( '\n' ).map( ( line ) => {
-				return JSON.parse( line );
-			} );
+		.split( '\n' )
+		.forEach( ( packet ) => {
+			if ( packet.trim() !== '' ) {
+				packets.push( JSON.parse( packet ) );
+			}
 		} );
+
+	packets.sort( sort );
+
+	let dividerIndicesProduct = 1;
+	packets.forEach( ( packet, index ) => {
+		let stringify = JSON.stringify( packet );
+		if ( stringify == '[[2]]' || stringify == '[[6]]' ) {
+			dividerIndicesProduct *= index + 1;
+		}
+	} );
+	return dividerIndicesProduct;
 };
 
 module.exports = { partOne, partTwo };
