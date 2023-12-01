@@ -1,0 +1,26 @@
+{
+  "name": "advent-of-code-solutions-2023",
+  "author": "Dean Sas <dean@deansas.org> (https://deansas.org)",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "mocha src/**/test.js",
+    "lint": "eslint src"
+  },
+  "description": "My solutions to advent-of-code 2023",
+  "main": "src/run.js",
+  "repository": "github:dsas/AdventOfCode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dsas/AdventOfCode/issues"
+  },
+  "homepage": "https://github.com/dsas/AdventOfCode/tree/master/2023#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-plugin-mocha": "^9.0.0",
+    "mocha": "^9.1.3",
+    "@wordpress/prettier-config": "^2.5.0",
+    "prettier": "npm:wp-prettier@latest"
+  }
+}
