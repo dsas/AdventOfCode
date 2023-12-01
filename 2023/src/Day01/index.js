@@ -27,11 +27,13 @@ const partTwo = ( input ) => {
 
   return parsedInput.reduce( ( sum, line ) => {
     let firstNumber = line.match( /(\d|zero|one|two|three|four|five|six|seven|eight|nine)/ )[0];
-
     if ( numberMap.has( firstNumber ) ) {
       firstNumber = numberMap.get( firstNumber );
     }
 
+    // Use a second regex to get the last number in the line - the first and
+    // last numbers can overlap like `twone`, so this was a quick way to solve
+    // that.
     let lastNumber = line.match( /.*(\d|zero|one|two|three|four|five|six|seven|eight|nine)/ )[1];
     if ( numberMap.has( lastNumber ) ) {
       lastNumber = numberMap.get( lastNumber );
