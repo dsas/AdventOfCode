@@ -5,7 +5,7 @@
  * @param { string } input
  * @returns
  */
-const partOne = (input) => {
+const partOne = ( input ) => {
   const COLOUR_LIMITS = {
     red: 12,
     green: 13,
@@ -47,8 +47,8 @@ const partTwo = ( input ) => {
       draw.forEach( ( cube ) => {
         let [ cubeCount, cubeColour ] = cube;
         maxColours[ cubeColour ] = Math.max( maxColours[ cubeColour ], parseInt( cubeCount ) );
-      });
-    });
+      } );
+    } );
     let powerSet = maxColours.blue * maxColours.green * maxColours.red;
     return powerSetSum + powerSet;
   }, 0 );
@@ -83,6 +83,6 @@ const parseInputString = ( input ) => input.trim().split( "\n" ).map( game => {
 				.split( ', ' )
 				.map( ( cubeColour ) => cubeColour.split( ' ' ) )
 		);
-});
+} );
 
-module.exports = {partOne, partTwo};
+module.exports = { partOne, partTwo };

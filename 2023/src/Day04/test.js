@@ -1,5 +1,5 @@
-const assert = require('assert');
-const solver = require('./');
+const assert = require( 'assert' );
+const solver = require( './' );
 
 describe( 'Day 04 part one', function() {
   it( 'should return 13 with input', function() {

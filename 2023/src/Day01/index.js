@@ -12,18 +12,18 @@ const partTwo = ( input ) => {
   // Find both the digits and the written numbers in each line, concatenate
   // the first and last numbers to create a number, and then sum the numbers
   // across all lines
-  const parsedInput = parseInputString(input);
+  const parsedInput = parseInputString( input );
   const numberMap = new Map();
-  numberMap.set( 'zero', '0');
+  numberMap.set( 'zero', '0' );
   numberMap.set( 'one', '1' );
   numberMap.set( 'two', '2' );
-  numberMap.set('three', '3' );
-  numberMap.set('four', '4' );
-  numberMap.set('five', '5' );
-  numberMap.set('six', '6' );
-  numberMap.set('seven', '7' );
-  numberMap.set('eight', '8' );
-  numberMap.set('nine', '9' );
+  numberMap.set( 'three', '3' );
+  numberMap.set( 'four', '4' );
+  numberMap.set( 'five', '5' );
+  numberMap.set( 'six', '6' );
+  numberMap.set( 'seven', '7' );
+  numberMap.set( 'eight', '8' );
+  numberMap.set( 'nine', '9' );
 
   return parsedInput.reduce( ( sum, line ) => {
     let firstNumber = line.match( /(\d|zero|one|two|three|four|five|six|seven|eight|nine)/ )[0];
@@ -41,7 +41,7 @@ const partTwo = ( input ) => {
 
     return sum + parseInt( firstNumber + lastNumber );
 
-  }, 0);
+  }, 0 );
 }
 
 const parseInputString = ( input ) => input.trim().split( "\n" );

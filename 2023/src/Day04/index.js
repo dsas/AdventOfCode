@@ -16,8 +16,8 @@ const partOne = ( input ) => {
     if ( matchingNumbers.length === 0 ) {
       return sum;
     }
-    return sum + 2 ** ( matchingNumbers.length - 1);
-  }, 0);
+    return sum + 2 ** ( matchingNumbers.length - 1 );
+  }, 0 );
 }
 
 /**
@@ -54,16 +54,16 @@ const partTwo = ( input ) => {
   return cardCopies.reduce( ( sum, copies ) => sum + copies, 0 );
 }
 
-const parseInputString = (input) => {
+const parseInputString = ( input ) => {
   const cards = input.trim()
     .split( "\n" )
     .map( line => line.match( /Card\s+\d+: (?<winning_numbers>.*) \| (?<card_numbers>.*)/ ).groups );
   return cards.map( card => {
     return {
-      winningNumbers: card.winning_numbers.split(" ")
+      winningNumbers: card.winning_numbers.split( " " )
         .map( number => parseInt( number ) )
         .filter( number => !Number.isNaN( number ) ),
-      cardNumbers: card.card_numbers.split(" ")
+      cardNumbers: card.card_numbers.split( " " )
         .map( number => parseInt( number ) )
         .filter( number => !Number.isNaN( number ) ),
     }

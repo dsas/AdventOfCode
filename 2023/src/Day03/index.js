@@ -5,13 +5,13 @@
  * @param { string } input
  */
 const partOne = ( input ) => {
-  const schematic = parseInputString(input);
+  const schematic = parseInputString( input );
   const { numberMap } = buildMaps( schematic );
 
   // Iterate over all of the numbers in the map to check if they are adjacent to a symbol
   let sum = 0;
-  for (const number of numberMap) {
-    if (number.adjacentSymbols.length > 0) {
+  for ( const number of numberMap ) {
+    if ( number.adjacentSymbols.length > 0 ) {
       sum += number.value;
     }
   }
@@ -26,8 +26,8 @@ const partOne = ( input ) => {
  * @returns
  */
 const partTwo = ( input ) => {
-  const schematic = parseInputString(input);
-  const { symbolMap } = buildMaps(schematic);
+  const schematic = parseInputString( input );
+  const { symbolMap } = buildMaps( schematic );
 
   let sum = 0;
   for ( const symbol of symbolMap.values() ) {
@@ -61,7 +61,7 @@ const parseInputString = ( input ) => input.trim().split( "\n" ) ;
  *      adjacentNumbers: array of numbers
  *
  */
-const buildMaps = (schematic) => {
+const buildMaps = ( schematic ) => {
   const numberMap = [];
   const symbolMap = new Map();
 
@@ -91,7 +91,7 @@ const buildMaps = (schematic) => {
   }
 
   // Build maps of all the symbols and numbers in the schematic
-  for (let x = 0; x < schematic.length; x++) {
+  for ( let x = 0; x < schematic.length; x++ ) {
     let currentNumber = '';
     let startNumberIndex, y, currentCharacter;
     for ( y = 0; y < schematic[x].length; y++ ) {
@@ -113,4 +113,4 @@ const buildMaps = (schematic) => {
   return { numberMap, symbolMap };
 }
 
-module.exports = {partOne, partTwo};
+module.exports = { partOne, partTwo };
