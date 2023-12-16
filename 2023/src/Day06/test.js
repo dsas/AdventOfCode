@@ -10,10 +10,9 @@ Distance:  9  40  200`;
 } );
 
 describe( 'Day 06 part two', function() {
-  it( 'should return 10 with input', function() {
-    let input = `5
-      5
-      20`;
-    assert.strictEqual( solver.partTwo( input ), 10 );
+  it( 'should return 71503 with input', function() {
+    let input = `Time:      7  15   30
+Distance:  9  40  200`;
+    assert.strictEqual( solver.partTwo( input ), 71503 );
   } );
 } );
